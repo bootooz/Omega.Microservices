@@ -1,0 +1,12 @@
+{
+  "name": "wsbridge",
+  "version": "1.0.0",
+  "description": "WebSocket bridge: ESP32 ws <-> Frontend wss",
+  "main": "bridge.js",
+  "scripts": {
+    "start": "node bridge.js"
+  },
+  "dependencies": {
+    "ws": "^8.13.0"
+  }
+}
