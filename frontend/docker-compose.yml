@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: frontend
+#    environment:
+#      VIRTUAL_HOST: dev.skiwatch.ru
+#      LETSENCRYPT_HOST: dev.skiwatch.ru
+#      LETSENCRYPT_EMAIL: disel0794@gmail.com
+#    ports:
+#      - "9876:80"
+    volumes:
+      - ./dist:/frontend
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.frontend.rule=Host(`dev.skiwatch.ru`)"
+      - "traefik.http.routers.frontend.entrypoints=websecure"
+      - "traefik.http.routers.frontend.tls.certresolver=letsencrypt"
+      - "traefik.http.services.frontend.loadbalancer.server.port=80"
+    networks:
+      - zalupa
+volumes:
+  dist:
+networks:
+  zalupa:
+    external: true

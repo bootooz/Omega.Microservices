@@ -1,0 +1,11 @@
+/.idea/
+/db_data/
+/certbot-data/
+/laravel/vendor/
+/laravel/node_modules/
+/vue/node_modules/
+/vue/wsbridge/node_modules/
+/laravel/.env
+/vue/dist/
+/.nginx/certs/
+/storage/*.key

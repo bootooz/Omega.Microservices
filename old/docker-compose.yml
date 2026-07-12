@@ -1,0 +1,59 @@
+version: "3.8"
+services:
+  nginx:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+      target: nginx
+    container_name: nginx
+    environment:
+      VIRTUAL_HOST: skiwatch.ru
+      LETSENCRYPT_HOST: skiwatch.ru
+      LETSENCRYPT_EMAIL: disel0794@gmail.com
+    expose:
+      - "80"
+    depends_on:
+      - app
+    networks:
+      - laravel
+
+  app:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+      target: app
+    container_name: app
+    environment:
+      APP_ENV: production
+      DB_HOST: db
+    command: >
+      sh -c "sleep 10 && php artisan migrate && php-fpm"
+    expose:
+      - "9000"
+    depends_on:
+      - db
+    networks:
+      - laravel
+
+  db:
+    image: mysql:8.0
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "${MYSQL_PORT}:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - laravel
+
+networks:
+  laravel:
+    external: true  # чтобы совместно использовать сеть с proxy
+
+volumes:
+  db_data:

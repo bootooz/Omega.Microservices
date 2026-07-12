@@ -1,0 +1,31 @@
+version: "3.8"
+
+services:
+  websocket:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: websocket
+    labels:
+#      - "traefik.enable=true"
+#      - "traefik.http.routers.websocket.rule=Host(`ws.skiwatch.ru`)"
+#      - "traefik.http.routers.websocket.entrypoints=websecure"
+#      - "traefik.http.routers.websocket.tls.certresolver=letsencrypt"
+#      - "traefik.http.services.websocket.loadbalancer.server.port=7771"
+#      # Для поддержки WS
+#      - "traefik.http.routers.websocket.service=websocket"
+#      - "traefik.http.services.websocket.loadbalancer.passHostHeader=true"
+      - "traefik.enable=true"
+      - "traefik.http.routers.ws.rule=Host(`ws.skiwatch.ru`)"
+      - "traefik.http.routers.ws.entrypoints=web"
+      - "traefik.http.routers.ws.service=wss-service"
+      - "traefik.http.routers.wss.rule=Host(`ws.skiwatch.ru`)"
+      - "traefik.http.routers.wss.entrypoints=websecure"
+      - "traefik.http.routers.wss.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.wss.service=wss-service"
+      - "traefik.http.services.wss-service.loadbalancer.server.port=7771"
+    networks:
+      - zalupa
+networks:
+  zalupa:
+    external: true

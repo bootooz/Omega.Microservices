@@ -1,0 +1,10 @@
+# User authentication file.
+# Here you list all the users with their passwords, one line per user.
+#
+# Syntax: <USER>:<PASSWORD>
+#
+# <USER>: name of the user.
+# <PASSWORD>: password of <USER>.
+admin:Ibkr1zp7!!!
+skiwatchprovider:%^J72Ca9e_u_x*)m)mXq^(_tBj2)HP
+rover:roverpasswd

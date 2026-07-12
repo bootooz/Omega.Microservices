@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  ntrip:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ntrip
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.ntrip-http.rule=Host(`ntrip.skiwatch.ru`)"
+      - "traefik.http.routers.ntrip-http.entrypoints=web"
+      - "traefik.http.routers.ntrip-http.service=ntrip-service"
+      - "traefik.http.routers.ntrip-https.rule=Host(`ntrip.skiwatch.ru`)"
+      - "traefik.http.routers.ntrip-https.entrypoints=websecure"
+      - "traefik.http.routers.ntrip-https.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.ntrip-https.service=ntrip-service"
+      - "traefik.http.services.ntrip-service.loadbalancer.server.port=2101"
+    networks:
+      - zalupa
+    ports:
+      - "2101:2101"
+networks:
+  zalupa:
+    external: true
