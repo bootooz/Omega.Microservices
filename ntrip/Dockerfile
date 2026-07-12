@@ -6,10 +6,10 @@ WORKDIR /var/www/skiwatch.ru/ntrip
 # Скачиваем исходники кастера прямо при сборке контейнера
 # Актуальная версия тут: https://igs.bkg.bund.de/root_ftp/NTRIP/software/caster/
 # Инструкция: https://igs.bkg.bund.de/root_ftp/NTRIP/software/caster/ntripcaster_manual.html#c2
-RUN wget https://igs.bkg.bund.de/root_ftp/NTRIP/software/caster/ntripcaster-2.0.47.tar.bz2 && \
-    tar xjf ntripcaster-2.0.47.tar.bz2 --no-same-owner
+RUN wget https://igs.bkg.bund.de/root_ftp/NTRIP/software/caster/ntripcaster-2.0.49.tar.bz2 && \
+    tar xjf ntripcaster-2.0.49.tar.bz2 --no-same-owner
 
-WORKDIR /var/www/skiwatch.ru/ntrip/ntripcaster-2.0.47
+WORKDIR /var/www/skiwatch.ru/ntrip/ntripcaster-2.0.49
 
 RUN ./configure && make && make install
 
