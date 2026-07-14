@@ -1,4 +1,11 @@
-# Установка
+# Установка скриптом
+
+Требуется ubuntu 22.04 x64 чистая.
+
+Скопируй из репозитория файл setup.sh.
+Сделай исполняемым: `chmod +x setup.sh` и запусти на сервере: `./setup.sh`
+
+# Ручная установка
 
 1. Создаем сервер-приложение "docker"
 2. Переходим в консоль сервера через веб-интерфейс
@@ -42,6 +49,6 @@
     - `docker-compose -f ./ntrip/docker-compose.yml up -d`
     - `chmod 600 ./traefik/acme.json` + `docker-compose -f ./traefik/docker-compose.yml up -d`
     - `docker-compose -f ./websocket/docker-compose.yml up -d`
-10. Возможные ошибки при запуске docker-compose:
+14. Возможные ошибки при запуске docker-compose:
     - /frontend/: если не собран фронт - будет ошибка об отсутствующей папке dist
     - /ntrip/: ERROR [ntrip  4/13] RUN wget https://igs.bkg.bund.de/root_ftp/NTRIP/software/caster/ntripcaster-2.0.47.tar.bz2 && tar xjf ntripcaster-2.0.47.tar.bz2 --no-same-owner (это ошибка версии. Нужно проверить доступность файла. Поменять версию)
