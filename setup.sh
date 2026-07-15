@@ -2,7 +2,8 @@
 set -e
 
 ## 1. Обновление системы
-apt-get update && apt-get upgrade -y
+export DEBIAN_FRONTEND=noninteractive
+apt-get update && apt-get upgrade -y -o Dpkg::Options::="--force-confold"
 
 ## 2. Настройка SSH
 echo "Configuring SSH..."
