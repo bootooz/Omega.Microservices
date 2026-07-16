@@ -3,7 +3,21 @@
 Требуется ubuntu 22.04 x64 чистая. Нельзя использовать `docker-compose`. Тут нужно `docker compose`
 
 - создать сервер, прописать A записи у домена в vds.selectel.ru
-- ssh root@XX.XX.XX.XX` 'bash -s' < setup.sh`
+- ssh root@XX.XX.XX.XX` 'bash -s' < setup.prod.sh`
+
+# Локальная установка (осталось решить вопрос с ssl-сертификатом)
+- Установить и запустить docker desktop
+- В папке проекта `bash -s < setup.local.sh`
+- Прописать в hosts роутера домен. Посмотри ip компа где развернут докер
+  - `ssh admin@192.168.1.1 "show dns-proxy" | grep static` - проверь прописан ли домен. Если нет - см.ниже
+  - `ssh admin@192.168.1.1` - войди в роутер
+  - `ip host skiwatch.ru 192.168.1.2` - добавить запись
+  - `ip host *.skiwatch.ru 192.168.1.2` - добавить запись
+  - `system configuration save` - применить настройки
+  - Если нужно удалить записи из hosts роутера
+    - `no ip host skiwatch.ru`
+    - `no ip host *.skiwatch.ru`
+    - `system configuration save` - применить настройки
 
 # Ручная установка
 
